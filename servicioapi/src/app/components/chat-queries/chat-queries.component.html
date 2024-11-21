@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Consultas de ChatGPT</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .error-message {
+            color: red;
+        }
+        .query-card {
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+        .query-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Gestión de Consultas de ChatGPT</h2>
+
+        <form (ngSubmit)="addOrUpdateQuery()" class="mb-4">
+            <div class="form-group">
+                <label for="query">Consulta:</label>
+                <input type="text" [(ngModel)]="newQuery.query" name="query" required class="form-control" placeholder="Escribe tu consulta aquí..." />
+            </div>
+            <button type="submit" class="btn btn-primary">{{ editingQueryId ? 'Actualizar Consulta' : 'Agregar Consulta' }}</button>
+            <button type="button" class="btn btn-secondary" (click)="resetForm()" *ngIf="editingQueryId">Cancelar</button>
+        </form>
+
+        <div *ngIf="errorMessage" class="error-message alert alert-danger">
+            {{ errorMessage }}
+        </div>
+        <div *ngIf="successMessage" class="alert alert-success">
+            {{ successMessage }}
+        </div>
+
+        <div *ngFor="let query of queries">
+            <div *ngIf="query" class="query-card">
+                <p><strong>Consulta:</strong> {{ query.query }}</p>
+                <p><strong>Respuesta:</strong> {{ query.response || 'Sin respuesta aún' }}</p>
+                <div class="mt-2">
+                    <button class="btn btn-warning btn-sm" (click)="startEditing(query)">Editar</button>
+                    <button class="btn btn-danger btn-sm" (click)="deleteQuery(query)">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

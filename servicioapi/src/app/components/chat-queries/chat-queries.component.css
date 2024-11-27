@@ -1,76 +1,170 @@
+/* Agregando un modo oscuro */
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: 'Roboto', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Estilo del cuerpo */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4; /* Color de fondo claro */
-    color: #333; /* Color de texto */
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
 }
 
-.container {
-    background-color: #fff; /* Fondo blanco para el contenedor principal */
-    border-radius: 8px; /* Bordes redondeados */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    padding: 20px; /* Espaciado interno */
-    margin-top: 20px; /* Margen superior */
+/* Encabezado con sombra */
+header {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(45deg, #4e8de3, #2f68c5);
+  color: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
 }
 
-h2 {
-    color: #007bff; /* Color azul para el título */
-    margin-bottom: 20px; /* Espaciado inferior */
+header h1 {
+  font-size: 3.5rem;
+  margin: 0;
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
+  animation: pulse 2s infinite;
 }
 
-.form-group {
-    margin-bottom: 15px; /* Espaciado inferior para el grupo de formulario */
+@keyframes pulse {
+  0%, 100% {
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
+  }
+  50% {
+    text-shadow: 5px 5px 15px rgba(0, 0, 0, 0.8);
+  }
 }
 
-input[type="text"] {
-    border: 1px solid #ced4da; /* Borde gris claro */
-    border-radius: 4px; /* Bordes redondeados */
-    padding: 10px; /* Espaciado interno */
-    width: 100%; /* Ancho completo */
+/* Animación de consultas */
+.query-item {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  animation: fadeIn 0.6s forwards;
 }
 
-input[type="text"]:focus {
-    border-color: #007bff; /* Cambiar el color del borde al enfocar */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra al enfocar */
+.query-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
 }
 
-.btn {
-    margin-top: 10px; /* Espaciado superior para los botones */
+/* Botón con transición más compleja */
+button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out, transform 0.2s ease-in-out;
+  text-transform: uppercase;
 }
 
-.error-message {
-    color: red; /* Color rojo para los mensajes de error */
-    margin-bottom: 15px; /* Espaciado inferior */
+button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-.query-card {
-    margin: 10px 0; /* Margen vertical entre tarjetas */
-    border: 1px solid #ddd; /* Borde gris */
-    border-radius: 5px; /* Bordes redondeados */
-    padding: 15px; /* Espaciado interno */
-    background-color: #f9f9f9; /* Fondo gris claro */
-    transition: box-shadow 0.2s; /* Transición suave para sombra */
+/* Botones con gradientes y efectos */
+.btn-primary {
+  background: linear-gradient(135deg, #4e8de3, #2f68c5);
+  color: white;
 }
 
-.query-card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Efecto de sombra al pasar el cursor */
+.btn-primary:hover {
+  background: linear-gradient(135deg, #3c7bb3, #1f5a87);
+  filter: brightness(1.1);
 }
 
-.btn-warning {
-    background-color: #ffc107; /* Color de fondo para el botón de actualización */
-    border: none; /* Sin borde */
-    color: white; /* Color de texto blanco */
+.btn-secondary {
+  background-color: #ddd;
+  color: #333;
+  font-style: italic;
 }
 
-.btn-warning:hover {
-    background-color: #e0a800; /* Color de fondo al pasar el cursor */
+.btn-secondary:hover {
+  background-color: #ccc;
+  transform: scale(1.02);
 }
 
-.btn-danger {
-    background-color: #dc3545; /* Color de fondo para el botón de eliminación */
-    border: none; /* Sin borde */
-    color: white; /* Color de texto blanco */
+/* Loader (Spinner) */
+.loader {
+  border: 8px solid #f3f3f3; 
+  border-top: 8px solid #4e8de3; 
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1.5s linear infinite;
 }
 
-.btn-danger:hover {
-    background-color: #c82333; /* Color de fondo al pasar el cursor */
+/* Diseño de Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  animation: fadeInModal 0.5s ease-in-out;
+}
+
+@keyframes fadeInModal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 20px;
+  width: 60%;
+  margin: 10% auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transform: scale(0.9);
+  animation: zoomIn 0.4s ease forwards;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.9);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Botón del modo oscuro */
+.dark-mode-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #555, #333);
+  color: white;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  z-index: 100;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode-toggle:hover {
+  background: linear-gradient(135deg, #777, #444);
 }

@@ -5,7 +5,7 @@ import { ChatbotService } from '../../services/chatbot.service';
 import { ChatQuery } from '../../models/chat-query';
 
 @Component({
-    selector: 'app-chat-queries',
+    selector: 'app-chat-queries', 
     standalone: true,
     imports: [CommonModule, FormsModule],
     templateUrl: './chat-queries.component.html',
@@ -17,6 +17,7 @@ export class ChatQueriesComponent implements OnInit {
     editingQueryId: number | null = null;  // Propiedad para manejar la edición
     errorMessage: string | null = null;
     successMessage: string | null = null;
+
 
     constructor(private chatbotService: ChatbotService) {}
 

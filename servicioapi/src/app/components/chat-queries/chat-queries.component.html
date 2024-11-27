@@ -3,58 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Consultas de ChatGPT</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .error-message {
-            color: red;
-        }
-        .query-card {
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 15px;
-            background-color: #f9f9f9;
-        }
-        .query-card:hover {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+    <title>AI Query Manager</title>
+    <link rel="stylesheet" href="chat-queries.component.css">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container mt-5">
-        <h2 class="text-center">Gestión de Consultas de ChatGPT</h2>
-
-        <form (ngSubmit)="addOrUpdateQuery()" class="mb-4">
-            <div class="form-group">
-                <label for="query">Consulta:</label>
-                <input type="text" [(ngModel)]="newQuery.query" name="query" required class="form-control" placeholder="Escribe tu consulta aquí..." />
+    <main>
+        <header>
+            <div class="header-icon">
+                <i class="fas fa-robot"></i>
             </div>
-            <button type="submit" class="btn btn-primary">{{ editingQueryId ? 'Actualizar Consulta' : 'Agregar Consulta' }}</button>
-            <button type="button" class="btn btn-secondary" (click)="resetForm()" *ngIf="editingQueryId">Cancelar</button>
-        </form>
+            <h1>AI Query Manager</h1>
+            <p>Interactúa con la inteligencia artificial ingresando tus consultas a continuación.</p>
+        </header>
 
-        <div *ngIf="errorMessage" class="error-message alert alert-danger">
-            {{ errorMessage }}
-        </div>
-        <div *ngIf="successMessage" class="alert alert-success">
-            {{ successMessage }}
-        </div>
+        <section class="form-section">
+            <form (ngSubmit)="addOrUpdateQuery()" class="query-form">
+                <input
+                    type="text"
+                    id="queryInput"
+                    [(ngModel)]="newQuery.query"
+                    name="query"
+                    placeholder="Escribe tu consulta aquí..."
+                    required
+                >
+                <div class="form-buttons">
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-plus-circle"></i>
+                        {{ editingQueryId ? 'Actualizar' : 'Agregar' }}
+                    </button>
+                    <button *ngIf="editingQueryId" type="button" class="btn-secondary" (click)="resetForm()">
+                        <i class="fas fa-times-circle"></i> Cancelar
+                    </button>
+                </div>
+            </form>
+        </section>
 
-        <div *ngFor="let query of queries">
-            <div *ngIf="query" class="query-card">
-                <p><strong>Consulta:</strong> {{ query.query }}</p>
-                <p><strong>Respuesta:</strong> {{ query.response || 'Sin respuesta aún' }}</p>
-                <div class="mt-2">
-                    <button class="btn btn-warning btn-sm" (click)="startEditing(query)">Editar</button>
-                    <button class="btn btn-danger btn-sm" (click)="deleteQuery(query)">Eliminar</button>
+        <section class="queries-section">
+            <div class="query-item" *ngFor="let query of queries">
+                <div class="query-content">
+                    <p><strong>Consulta:</strong> {{ query.query }}</p>
+                    <p><strong>Respuesta:</strong> {{ query.response || 'Sin respuesta aún' }}</p>
+                </div>
+                <div class="query-actions">
+                    <button class="btn-action edit" (click)="startEditing(query)">
+                        <i class="fas fa-edit"></i> Editar
+                    </button>
+                    <button class="btn-action delete" (click)="deleteQuery(query)">
+                        <i class="fas fa-trash-alt"></i> Eliminar
+                    </button>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </section>
+    </main>
 </body>
 </html>

@@ -14,4 +14,8 @@ RUN npm run build --prod
 
 EXPOSE 4200
 
+<<<<<<< HEAD
 ENTRYPOINT ["npm", "start"]
+=======
+ENTRYPOINT ["npm", "start"]
+>>>>>>> 4413fd984ee3ffc5af8df9528b6fa120b186b9e8

@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - develop-angular
+      
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
